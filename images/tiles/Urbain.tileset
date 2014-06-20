@@ -1,0 +1,22 @@
+{
+    "type": "terrain",
+    "size": 32,
+    "tiles": [
+        {
+            "number": 0,
+			"type":0,
+            "anim": false,
+            "x": 0,
+            "y": 0,
+			"transparency": false
+        },
+        {
+            "number": 1,
+			"type":0,
+            "anim": false,
+            "x": 32,
+            "y": 0,
+			"transparency": false
+        }
+    ]
+}
