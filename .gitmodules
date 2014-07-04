@@ -1,0 +1,3 @@
+[submodule "scripts/audio"]
+	path = scripts/audio
+	url = https://github.com/Minothor/chipsy
