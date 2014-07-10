@@ -1,15 +1,11 @@
 function getPersonnage()
 {
-	personnage = new Personnage(generateName(),generateNomImage());
+	className = generateClassName();
+	values = generateClass(className);
+	personnage = new Personnage(generateName(),generateNomImage(),
+	values[0]*2,values[1],values[2],values[3],values[4],values[5]);
 	personnage.imageColors = generateImageColor();
-	generateClass(personnage);
 	return personnage;
-}
-
-function generateNomImage()
-{
-	i = Math.floor(Math.random()*5)+1;
-	return 'perso/perso'+i+'.png';
 }
 
 function generateName()
@@ -17,40 +13,51 @@ function generateName()
 	return 'Arthur';
 }
 
-function generateClass(personnage)
+function generateNomImage()
 {
-	tabValue = [0,0,0,0,0,0];
-	var v;
-	for(var i=0;i<10;i++)
-	{
-		v = Math.floor(Math.random()*tabValue.length);
-		tabValue[v]++;
-	}
+	i = Math.floor(Math.random()*5)+1;
+	return 'perso'+i+'.png';
+}
 
-	calculerClasse(tabValue);
+function generateClassName()
+{
 	tabClasses = ['street','kendo','karate','football','baseball','boxe'];
-	
 	i = Math.floor(Math.random()*tabClasses.length);
-	personnage.fighterClass = tabClasses[i];
-	tabValue.sort( function (a, b) {  return b - a;});
-	x=0;
-	switch(personnage.fighterClass)
+	return tabClasses[i];
+}
+
+function generateTab(nb)
+{
+	tab = [0,0,0,0,0,0];
+	var v;
+	for(var i=0;i<nb;i++)
 	{
-		case 'street': generateStreet(personnage,tabValue);	break;
-		case 'kendo': generateKendo(personnage,tabValue);	break;
-		case'karate': generateKarate(personnage,tabValue);	break;
-		case'football': generateFootball(personnage,tabValue);	break;
-		case'baseball': generateBaseball(personnage,tabValue);	break;
-		case'boxe': generateBoxe(personnage,tabValue);	break;
+		v = Math.floor(Math.random()*tab.length);
+		tab[v]++;
 	}
-	
-	return personnage;
+	return tab;
+}
+
+function generateClass(className)
+{
+	tabValue = generateTab(10);
+	tabValue.sort( function (a, b) {  return b - a;});
+	switch(className)
+	{
+		case 'street': i1=0;i2=3;	break;
+		case 'kendo': i1=4;i2=5;	break;
+		case'karate': i1=1;i2=3;	break;
+		case'football': i1=0;i2=2;	break;
+		case'baseball': i1=1;i2=4;	break;
+		case'boxe': i1=2;i2=5;	break;
+	}	
+	return generateValues(tabValue,i1,i2);
 }
 
 
 function shuffle(tabValue)
 {
-
+	x=0;
 	while(x<100)
 	{
 		tabValue.sort( function(a,b) {
@@ -60,96 +67,35 @@ function shuffle(tabValue)
 	}
 	return tabValue;
 }
-function generateStreet(personnage,tabValue)
-{
-
-	i = Math.floor(Math.random()*2);
-	personnage.hp  += tabValue[i]*2;
-	personnage.def += tabValue[1-i];	
-	tabValue.splice (0,2);
-	
-	shuffle(tabValue);
-	personnage.vit += tabValue[0];
-	personnage.esq += tabValue[1];
-	personnage.pre += tabValue[2];
-	personnage.frc += tabValue[3];
-	
-	
-}
-function generateKendo(personnage,tabValue)
-{
-	i = Math.floor(Math.random()*2);
-	personnage.esq += tabValue[i];
-	personnage.pre += tabValue[1-i];
-	tabValue.splice (0,2);
-	
-	shuffle(tabValue);
-	personnage.vit += tabValue[0];
-	personnage.hp  += tabValue[1]*2;
-	personnage.def += tabValue[2];
-	personnage.frc += tabValue[3];
-}
-	
-function generateKarate(personnage,tabValue)
-{
-	i = Math.floor(Math.random()*2);
-	personnage.vit += tabValue[i];
-	personnage.def += tabValue[1-i];
-	tabValue.splice (0,2);
-	
-	shuffle(tabValue);
-	personnage.hp  += tabValue[0]*2;
-	personnage.esq += tabValue[1];
-	personnage.pre += tabValue[2];
-	personnage.frc += tabValue[3];
-}
-function generateFootball(personnage,tabValue)
-{
-	i = Math.floor(Math.random()*2);
-	personnage.hp  += tabValue[i]*2;
-	personnage.frc += tabValue[1-i]; 
-	tabValue.splice (0,2);
-	
-	shuffle(tabValue);
-	personnage.vit += tabValue[0];
-	personnage.esq += tabValue[1];
-	personnage.pre += tabValue[2];
-	personnage.def += tabValue[3];
-}
-function generateBaseball(personnage,tabValue)
-{
-	i = Math.floor(Math.random()*2);
-	personnage.vit += tabValue[i];
-	personnage.pre += tabValue[1-i];
-	tabValue.splice (0,2);
-	
-	shuffle(tabValue);
-	personnage.hp  += tabValue[0]*2;
-	personnage.esq += tabValue[1];
-	personnage.def += tabValue[2];
-	personnage.frc += tabValue[3];
-}
-function generateBoxe(personnage,tabValue)
-{
-	i = Math.floor(Math.random()*2);
-	personnage.esq += tabValue[i];
-	personnage.frc += tabValue[1-i];
-	tabValue.splice (0,2);
-	
-	shuffle(tabValue);
-	personnage.vit += tabValue[0];
-	personnage.hp  += tabValue[1]*2;
-	personnage.pre += tabValue[2];
-	personnage.def += tabValue[3];
-	
-}
 
 
-
-
-
-	function calculerClasse(tabValue)
+function makeArray(array1,array2,i1,i2)
+{
+	retArray = new Array();	
+	for(i=0;i<6;i++)
 	{
-		var max = Math.max(tabValue);
-		var index = tabValue.indexOf(max);
+		if(i==i1 || i==i2)
+		{
+			retArray.push(array2[0]);
+			array2.splice(0,1);
+		}
+		else
+		{		
+			retArray.push(array1[0]);
+			array1.splice(0,1);		
+		}
 	}
+	return retArray;	
+}
+
+//hp0,spd1,str2,res3,dex4,agl5
+function generateValues(tabValue,i1,i2)
+{
+	tabMax = new Array();
+	i = Math.floor(Math.random()*2);
+	tabMax.push(tabValue[i]);
+	tabMax.push(tabValue[1-i]);
+	tabValue.splice (0,2);
+	tabValue = shuffle(tabValue);
+	return makeArray(tabValue,tabMax,i1,i2);	
+}

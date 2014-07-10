@@ -26,7 +26,6 @@ var plateau;
 
 $(document).ready(function() 
 {
-
 	plateau2 = getMap(10,15);//new Plateau(10,15);
 	canvas = document.getElementById('myCanvas');
 	context = canvas.getContext('2d');
@@ -38,11 +37,9 @@ $(document).ready(function()
 	joueur1.addPersonnage(getPersonnage(),1,4);
 	joueur1.addPersonnage(getPersonnage(),2,3);
 	
-	
 	joueur2.addPersonnage(getPersonnage(),8,10);
 	joueur2.addPersonnage(getPersonnage(),9,8);
 
-	
 	boucleJeu = setInterval(refreshGame,40);
 });
 
@@ -89,7 +86,7 @@ function onMouseDown(event)
 			if( selectedPersonnage != null)
 			{
 				if(selectedPersonnage.actif)
-					setCheminPossible(selectedPersonnage.mov,selectedPersonnage.getI(),selectedPersonnage.getJ());	
+					setCheminPossible(selectedPersonnage.getMov(),selectedPersonnage.getI(),selectedPersonnage.getJ());	
 				else
 					selectedPersonnage = null;
 			
@@ -106,7 +103,7 @@ function onMouseDown(event)
 					{
 						selectedPersonnage.setPosition(cursorPosition.I,cursorPosition.J);
 						plateau2.eteindre();					
-						plateau2.allumerRouge(selectedPersonnage.portee,selectedPersonnage.getI(),selectedPersonnage.getJ());
+						plateau2.allumerRouge(selectedPersonnage.getRng(),selectedPersonnage.getI(),selectedPersonnage.getJ());
 						phaseNum = 1;						
 					}
 				}	
@@ -145,7 +142,7 @@ function onMouseDown(event)
 			if( selectedPersonnage != null)
 			{
 				if(selectedPersonnage.actif)
-					setCheminPossible(selectedPersonnage.mov,selectedPersonnage.getI(),selectedPersonnage.getJ());	
+					setCheminPossible(selectedPersonnage.getMov(),selectedPersonnage.getI(),selectedPersonnage.getJ());	
 				else
 					selectedPersonnage = null;			
 			}
@@ -232,10 +229,8 @@ function refreshGame()
 {
 	//cadrillage(context);
 	
-    context.globalAlpha=1;
-	
+    context.globalAlpha=1;	
 	plateau2.dessine(context);
-
 	joueur1.dessine(context);
 	
 	joueur2.dessine(context);
@@ -244,38 +239,38 @@ function refreshGame()
     context.globalAlpha=1;
 	if(selectedPersonnage != null)
 	{
-		if(selectedPersonnage.getJ()>7)
-			selectedPersonnage.dessineCarteID(context,16,16);
+		if(selectedPersonnage.getJ()>7)		
+			DrawingPanel.dessineCarteID(context,selectedPersonnage,16,16);
 		else
-			selectedPersonnage.dessineCarteID(context,15*32-12-96,16);
+			DrawingPanel.dessineCarteID(context,selectedPersonnage,15*32-12-96,16);
 	}
 	else
 	{
 		temp  = getPersonnageOn(cursorPosition.I,cursorPosition.J);
 		if(temp.getJ()>7)
-			temp.dessineCarteID(context,16,16);
+			DrawingPanel.dessineCarteID(context,temp,16,16);
 		else
-			temp.dessineCarteID(context,15*32-12-96,16);
+			DrawingPanel.dessineCarteID(context,temp,15*32-12-96,16);
 	}
 		
 }
 
-	function getColorData(personnage,imageData,x,y)
-	{
-		var data = imageData.data;
-		var imgCol = personnage.imageColors;
+function getColorData(personnage,imageData,x,y)
+{
+	var data = imageData.data;
+	var imgCol = personnage.imageColors;
 
-		for(var i = 0; i < data.length; i += 4) 
-		{			
-			setPeau(imageData,i,imgCol.skinColor);		
-			setCheveux(imageData,i,imgCol.hairColor); 		
-			setTShirt(imageData,i,imgCol.shirtColor);	
-			setPantalon(imageData,i,imgCol.trousersColor); 
-			setChaussures(imageData,i,imgCol.shoesColor); 
-			
-			// yeux
-			changeColor(imageData,i,0,19,125,125,19,0);
-			changeColor(imageData,i,188,190,219,219,190,188);					
-		}
-		return imageData;
-    }
+	for(var i = 0; i < data.length; i += 4) 
+	{			
+		setPeau(imageData,i,imgCol.skinColor);		
+		setCheveux(imageData,i,imgCol.hairColor); 		
+		setTShirt(imageData,i,imgCol.shirtColor);	
+		setPantalon(imageData,i,imgCol.trousersColor); 
+		setChaussures(imageData,i,imgCol.shoesColor); 
+		
+		// yeux
+		changeColor(imageData,i,0,19,125,125,19,0);
+		changeColor(imageData,i,188,190,219,219,190,188);					
+	}
+	return imageData;
+}

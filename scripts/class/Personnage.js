@@ -1,32 +1,69 @@
-function Personnage(nom,nomImage) 
+function Personnage(nom,nomImage,hp,spd,str,res,dex,agl) 
 {
-	this.nom = nom;
-	
-	this.mov = 3;
+	this.nom = nom;	
 	this.classFighter;
-	this.portee = 1;
-	this.frc = 6;
-	this.def = 2;
-	this.vit = 4;
-	
-	
-	this.crt = 0;
-	this.sgn = 0;
-	this.cnf = 0;
-	
-	this.clp = 2;
 	
 	this.niv = 1;
 	this.xp = 0;
+		/*
+	this.def = 10;
+	this.vit = 10;
+	this.esq = 10;
+	this.pre = 10;
+	this.frc = 10;
+	//*/
 	
-	this.hp = 10;
-	this.hpMax = 10;
+	
+	/* characteristics */
+	this.hpMax = hp+10;
+	this.hp = this.hpMax;
+	
+	this.movement = 3;	
+	this.range = 1;
+	this.speed = spd+4;	
+	this.strength = str+6;
+	this.resistance = res+2;	
+	this.dexterity = dex;
+	this.agility = agl;
+	this.volition = 0;
+	
+	/* Special */
+	this.critical = 0;
+	this.bleeding = 0;
+	this.stun = 0;	
+	this.criticalDefence = 0;
+	this.bleedingDefence = 0;
+	this.stunDefence = 0;	
+	
+	/* Gettor simple */
+	this.getHp = function () { return this.hp; }
+	this.getHpMax = function () { return this.hp; }
+	this.getMov = function () { return this.movement; }
+	this.getRng = function () { return this.range; }
+	this.getSpd = function () { return this.speed; }
+	this.getStr = function () { return this.strength; }
+	this.getRes = function () { return this.resistance; }
+	this.getDex = function () { return this.dexterity; }
+	this.getAgl = function () { return this.agility; }
+	this.getVol = function () { return this.volition; }
+	
+	/* Gettor calculated */
+	this.getDodge = function() 
+	{ 
+		return this.getAgl()*2+this.getVol();
+	}
+	this.getHit = function() 
+	{ 
+		return this.getDex()*2+this.getSpd();
+	}
+	
+	
 	
 	this.imageColors;		
 	this.img = new Image();  
-	this.img.src = "images/"+nomImage;
+	this.img.src = "images/perso/"+nomImage;
 	this.imgG = new Image();  
-	this.imgG.src = "images/g"+nomImage;
+	this.imgG.src = "images/perso/g"+nomImage;
 	this.actif = true;
 	this.x;
 	this.y;
@@ -49,8 +86,10 @@ function Personnage(nom,nomImage)
 	this.getY = function () { return this.y;}
 	this.getX = function () { return this.x;}
 	
+	
+	
 	this.dessine = function (context)//context
-	{		
+	{	
 		if(this.actif )
 		{
 			context.drawImage(this.img, this.x, this.y);
@@ -64,21 +103,6 @@ function Personnage(nom,nomImage)
 		}
 	}
 	
-	this.dessineCarteID = function (context,x,y)//context
-	{		
-		context.fillStyle="#00cccc";
-		context.globalAlpha=0.8;
-		context.fillRect(x,y,96,64);
-		context.globalAlpha=1;
-		
-		context.drawImage(this.img, x,y);
-		this.imageData = context.getImageData(x,y, this.img.width, this.img.height);
-		getColorData(this,this.imageData ,x,y) ;
-		context.putImageData(this.imageData , x, y);
-			
-		context.fillStyle="#000000";
-		context.fillText('hp : '+this.hp,x+32,y+12*1);
-		context.fillText('frc : '+this.frc,x+32,y+12*2);
-		context.fillText('def : '+this.def,x+32,y+12*3);
-	}
+	
+	
 }
