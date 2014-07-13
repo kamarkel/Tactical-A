@@ -101,7 +101,7 @@ function Personnage(name,nomImage,className,hp,spd,str,res,dex,agl)
 	
 	/* Gettor simple */
 	this.addHp = function(x) {  this.hp+=x; }
-	this.addHpMax = function(x) {  this.hp+=x; }
+	this.addHpMax = function(x) {  this.hpMax+=x; }
 	this.addSpd = function(x) {  this.speed+=x; }
 	this.addStr = function(x) {  this.strength+=x; }
 	this.addRes = function(x) {  this.resistance+=x; }
