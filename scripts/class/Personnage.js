@@ -1,9 +1,9 @@
-function Personnage(nom,nomImage,hp,spd,str,res,dex,agl) 
+function Personnage(name,nomImage,className,hp,spd,str,res,dex,agl) 
 {
-	this.nom = nom;	
-	this.classFighter;
+	this.name = name;	
+	this.className = className;
 	
-	this.niv = 1;
+	this.lvl = 1;
 	this.xp = 0;
 		/*
 	this.def = 10;
@@ -36,16 +36,23 @@ function Personnage(nom,nomImage,hp,spd,str,res,dex,agl)
 	this.stunDefence = 0;	
 	
 	/* Gettor simple */
+//hp0,spd1,str2,res3,dex4,agl5
+	this.getName = function () { return this.name; }
+	this.getLvl = function () { return this.lvl; }
+	this.getXp = function () { return this.xp; }
+	
 	this.getHp = function () { return this.hp; }
-	this.getHpMax = function () { return this.hp; }
-	this.getMov = function () { return this.movement; }
-	this.getRng = function () { return this.range; }
+	this.getHpMax = function () { return this.hpMax; }
 	this.getSpd = function () { return this.speed; }
 	this.getStr = function () { return this.strength; }
 	this.getRes = function () { return this.resistance; }
 	this.getDex = function () { return this.dexterity; }
 	this.getAgl = function () { return this.agility; }
+	
+	this.getMov = function () { return this.movement; }
+	this.getRng = function () { return this.range; }
 	this.getVol = function () { return this.volition; }
+	this.getClass = function () { return this.className; }
 	
 	/* Gettor calculated */
 	this.getDodge = function() 
@@ -56,8 +63,50 @@ function Personnage(nom,nomImage,hp,spd,str,res,dex,agl)
 	{ 
 		return this.getDex()*2+this.getSpd();
 	}
+	this.getXpOwned = function(personnage) 
+	{ 
+		x = 0;
+		if(this.getLvl()>peronnage.getLvl())
+		{
+			x = this.getLvl()-peronnage.getLvl()*18;
+		}
+		x+=(this.getDodge()+this.getHit())/(2*peronnage.getLvl());
+		return Math.floor(x);
+	}
+	
+	this.addXp = function(xp) 
+	{ 
+		this.xp+=xp;
+		while(this.xp>=100)
+		{
+			this.lvlUp();
+			this.xp-=100;
+		}
+	}
 	
 	
+	this.lvlUp = function() 
+	{ 
+		this.lvl++;
+		nums = PersonnageFactory.getAtrNum(this.getClass());	
+		array = makeArray(generateTab(3,4),generateTab(3,2),nums[0],nums[1]);
+		
+		this.addHpMax(array[0]*2);
+		this.addSpd(array[1]);
+		this.addStr(array[2]);
+		this.addRes(array[3]);
+		this.addDex(array[4]);
+		this.addAgl(array[5]);
+	}
+	
+	/* Gettor simple */
+	this.addHp = function(x) {  this.hp+=x; }
+	this.addHpMax = function(x) {  this.hp+=x; }
+	this.addSpd = function(x) {  this.speed+=x; }
+	this.addStr = function(x) {  this.strength+=x; }
+	this.addRes = function(x) {  this.resistance+=x; }
+	this.addDex = function(x) {  this.dexterity+=x; }
+	this.addAgl = function(x) {  this.agility+=x; }
 	
 	this.imageColors;		
 	this.img = new Image();  

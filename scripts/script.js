@@ -39,7 +39,9 @@ $(document).ready(function()
 	
 	joueur2.addPersonnage(getPersonnage(),8,10);
 	joueur2.addPersonnage(getPersonnage(),9,8);
-
+	
+	joueur1.getPersonnage(0).lvlUp();
+	
 	boucleJeu = setInterval(refreshGame,40);
 });
 

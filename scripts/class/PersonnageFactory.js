@@ -1,8 +1,36 @@
+var PersonnageFactory = function () {};
+
+PersonnageFactory.lvlUp = function(personnage)
+{
+	/*nums = PersonnageFactory.getAtrNum(personnage.getClass());	
+	array = makeArray(generateTab(3,2),generateTab(3,4),nums[0],nums[1]);
+	alert(array);*/
+}
+PersonnageFactory.getAtrNum = function(className)
+{
+	switch(className)
+	{
+		case 'street': i1=0;i2=3;	break;
+		case 'kendo': i1=4;i2=5;	break;
+		case'karate': i1=1;i2=3;	break;
+		case'football': i1=0;i2=2;	break;
+		case'baseball': i1=1;i2=4;	break;
+		case'boxe': i1=2;i2=5;	break;
+	}	
+	return [i1,i2];
+}
+
+
+
+
+
+
+
 function getPersonnage()
 {
 	className = generateClassName();
 	values = generateClass(className);
-	personnage = new Personnage(generateName(),generateNomImage(),
+	personnage = new Personnage(generateName(),generateNomImage(),className,
 	values[0]*2,values[1],values[2],values[3],values[4],values[5]);
 	personnage.imageColors = generateImageColor();
 	return personnage;
@@ -26,9 +54,13 @@ function generateClassName()
 	return tabClasses[i];
 }
 
-function generateTab(nb)
+function generateTab(nb,tabSize)
 {
-	tab = [0,0,0,0,0,0];
+	var tab = new Array();	
+	for(var i=0;i<tabSize;i++)
+	{
+		tab.push(0);
+	}
 	var v;
 	for(var i=0;i<nb;i++)
 	{
@@ -40,18 +72,10 @@ function generateTab(nb)
 
 function generateClass(className)
 {
-	tabValue = generateTab(10);
+	tabValue = generateTab(10,6);
 	tabValue.sort( function (a, b) {  return b - a;});
-	switch(className)
-	{
-		case 'street': i1=0;i2=3;	break;
-		case 'kendo': i1=4;i2=5;	break;
-		case'karate': i1=1;i2=3;	break;
-		case'football': i1=0;i2=2;	break;
-		case'baseball': i1=1;i2=4;	break;
-		case'boxe': i1=2;i2=5;	break;
-	}	
-	return generateValues(tabValue,i1,i2);
+	atrNums = PersonnageFactory.getAtrNum(className);	
+	return generateValues(tabValue,atrNums[0],atrNums[1]);
 }
 
 
@@ -67,6 +91,17 @@ function shuffle(tabValue)
 	}
 	return tabValue;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 function makeArray(array1,array2,i1,i2)
