@@ -63,6 +63,30 @@ function Personnage(name,nomImage,className,hp,spd,str,res,dex,agl)
 	{ 
 		return this.getDex()*2+this.getSpd();
 	}
+	
+	this.isHitted = function(defender)
+	{
+		ran = Math.random();
+		x = this.getHit()/defender.getDodge()+this.getHit();
+		return (ran<x)?true:false;
+	}
+	this.getDmg = function(defender) 
+	{ 
+		nb = this.getStr()-defender.getRes();
+		return (nb>0)?nb:1;
+	}
+	
+	this.attaque = function (defender)
+	{
+		if(this.isHitted(defender))
+		{
+			x = this.getDmg(defender);
+			defender.decreaseHp(x);
+			return x;
+		}
+		return "Miss";
+	}
+	
 	this.getXpOwned = function(personnage) 
 	{ 
 		x = 0;
@@ -121,15 +145,15 @@ function Personnage(name,nomImage,className,hp,spd,str,res,dex,agl)
 		this.y = i*32;
 		this.x = j*32;
 	}
-	this.attaque = function (defender)
-	{
-		defender.decreaseHp(this.frc-defender.def);
-	}
+	
+	
 	this.decreaseHp = function(n)
 	{
 		this.hp-=n;
 		this.hp=(this.hp<0)?0:this.hp;
 	}
+	
+	
 	this.getI = function () { return Math.floor(this.y/32);}
 	this.getJ = function () { return Math.floor(this.x/32);}
 	this.getY = function () { return this.y;}
