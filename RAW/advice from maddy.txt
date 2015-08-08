@@ -2,91 +2,85 @@
 [19:50:11] Nick Boyd: could I possibly trouble you for a bit of critique plase ma'am?
 [20:03:42] Nick Boyd: one of the guys on my Java course is interested in learning pixel art and making a game, so I've been whipping up some stuff in pickle+paint.net for them to try and inspire them further.
 [20:04:10] Nick Boyd: (coding is more fun when you can see a snapshot of what you're making come together)
-[23:15:37] Maddy Watson (Peach Lock): sure
+[23:15:37] Maddy (Peach Lock): sure
 [23:16:39] Nick Boyd: cheers, Oliver (Pumpkin) has been critiquing it so far, so I've made a few alterations,
 [23:16:48] Nick Boyd:  let me zip up the folder so far
-[23:16:52] Maddy Watson (Peach Lock): at the risk of sounding bold
-[23:16:56] Maddy Watson (Peach Lock): pumpkin doesn't know shit about pixel art
+[23:16:52] Maddy (Peach Lock): at the risk of sounding bold
+[23:16:56] Maddy (Peach Lock): pumpkin doesn't know shit about pixel art
 [23:17:00] Nick Boyd: XD
 [23:17:28] *** Nick Boyd sent Ahmed's RTS.zip ***
-[23:17:57] Maddy Watson (Peach Lock): ooh an RTS
+[23:17:57] Maddy (Peach Lock): ooh an RTS
 [23:18:05] Nick Boyd: using Pickle for base tiles and seam fixing, paint.net for blending/tansparency
 [23:18:57] Nick Boyd: well, more turn based, he's doing a javascript/html5 canvas based thing like FireEmblem, but more rival schools/gangs brawling
 [23:19:40] Nick Boyd: I've suggested making it multi-tiered battlegrounds (so going down into sewer tunnerls, up into buildings etc)
-[23:19:54] Maddy Watson (Peach Lock): first thing: your color usage is off the charts, tons of redundant shades you have to zoom in really close to tell the difference of
+[23:19:54] Maddy (Peach Lock): first thing: your color usage is off the charts, tons of redundant shades you have to zoom in really close to tell the difference of
 [23:20:09] Nick Boyd: but there's no code in this, just a html and js file we whipped up to let me test the animations in canvas
 [23:21:12] Nick Boyd: any tiles that are especially problematic in that respect?
-[23:21:42] Maddy Watson (Peach Lock): T-S-Urbain, the colors on the road much too similar in lightness
+[23:21:42] Maddy (Peach Lock): T-S-Urbain, the colors on the road much too similar in lightness
 [23:21:50] Nick Boyd: aside from the grass? I know that's horrendous, sadly enough, it's the best rendition of grass I'v done to date at the same time
-[23:22:00] Maddy Watson (Peach Lock): and the hue is inconsistent throughout
+[23:22:00] Maddy (Peach Lock): and the hue is inconsistent throughout
 [23:22:36] Nick Boyd: inconsitent? are you talking abou the tarmac or the pain?
-[23:22:50] Maddy Watson (Peach Lock): tarmac
-[23:22:58] Maddy Watson (Peach Lock): the darkest shade is hue 37, middle is 0, lightest is 0
+[23:22:50] Maddy (Peach Lock): tarmac
+[23:22:58] Maddy (Peach Lock): the darkest shade is hue 37, middle is 0, lightest is 0
 [23:23:00] Nick Boyd: the tarmec's pretty much one dark blue and one dark brown if I remember correctly
-[23:23:04] Maddy Watson (Peach Lock): middle is 218 sorry
+[23:23:04] Maddy (Peach Lock): middle is 218 sorry
 [23:23:18] Nick Boyd: ah, ok
-[23:23:19] Maddy Watson (Peach Lock): so you've got a gradient of 37-218-0
-[23:23:43] Maddy Watson (Peach Lock): you want to keep the numbers much more constrained and linear if you're going to mess with hues
-[23:24:00] Maddy Watson (Peach Lock): they're all the same lightness too which is why they're hard to distinguish
-[23:24:56] Maddy Watson (Peach Lock): ummm a better way to explain it is if you look at the differences in hue
-[23:26:22] Maddy Watson (Peach Lock): if you're hue shifting you want a difference of like, +5, +5, +5, +5
-[23:26:30] Maddy Watson (Peach Lock): or 5,6,7,8, etc if you want to emphasise
-[23:27:52] Maddy Watson (Peach Lock): what you've got going on there is +181 and then -218
-[23:28:18] Maddy Watson (Peach Lock): along the same lines the speckles on the pavement are a completely different hue and don't really work
-[23:29:57] Maddy Watson (Peach Lock): sorry if i'm losing you
-[23:30:17] Maddy Watson (Peach Lock): basically the key thing when choosing shades and colors is that you use consistent increments
+[23:23:19] Maddy (Peach Lock): so you've got a gradient of 37-218-0
+[23:23:43] Maddy (Peach Lock): you want to keep the numbers much more constrained and linear if you're going to mess with hues
+[23:24:00] Maddy (Peach Lock): they're all the same lightness too which is why they're hard to distinguish
+[23:24:56] Maddy (Peach Lock): ummm a better way to explain it is if you look at the differences in hue
+[23:26:22] Maddy (Peach Lock): if you're hue shifting you want a difference of like, +5, +5, +5, +5
+[23:26:30] Maddy (Peach Lock): or 5,6,7,8, etc if you want to emphasise
+[23:27:52] Maddy (Peach Lock): what you've got going on there is +181 and then -218
+[23:28:18] Maddy (Peach Lock): along the same lines the speckles on the pavement are a completely different hue and don't really work
+[23:29:57] Maddy (Peach Lock): sorry if i'm losing you
+[23:30:17] Maddy (Peach Lock): basically the key thing when choosing shades and colors is that you use consistent increments
 [23:30:46] Nick Boyd: don't worry, this is a new approach for me, but I'm trying to get my head round it in real time
-[23:30:57] Maddy Watson (Peach Lock): haha sorry if i'm overwhelming you
-[23:31:02] Maddy Watson (Peach Lock): and also yeah, the color usage on the grass is insane
-[23:31:13] Maddy Watson (Peach Lock): also on the soda machine too
-[23:31:24] Maddy Watson (Peach Lock): there's tons of individual reds and greys
-[23:31:30] Maddy Watson (Peach Lock): you want to keep it to 4 shades of each color at the most
+[23:30:57] Maddy (Peach Lock): haha sorry if i'm overwhelming you
+[23:31:02] Maddy (Peach Lock): and also yeah, the color usage on the grass is insane
+[23:31:13] Maddy (Peach Lock): also on the soda machine too
+[23:31:24] Maddy (Peach Lock): there's tons of individual reds and greys
+[23:31:30] Maddy (Peach Lock): you want to keep it to 4 shades of each color at the most
 [23:31:34] Nick Boyd: much of it stems from trying to blend DX
-[23:31:40] Maddy Watson (Peach Lock): never blend!
-[23:31:40] Maddy Watson (Peach Lock): turn that shit off
-[23:31:48] Maddy Watson (Peach Lock): blending is like kryptonite to pixel art
+[23:31:40] Maddy (Peach Lock): never blend!
+[23:31:40] Maddy (Peach Lock): turn that shit off
+[23:31:48] Maddy (Peach Lock): blending is like kryptonite to pixel art
 [23:38:18] Nick Boyd: ok, I probably completely misunderstood your instructions about hue shifting,
 [23:38:35] Nick Boyd: but this is what the roads look like now:
 [23:38:53] *** Nick Boyd sent T-S-Urbain.png ***
-[23:39:50] Maddy Watson (Peach Lock): okay now that's a lot better because now the difference is consistently in the negative
-[23:40:03] Maddy Watson (Peach Lock): it goes from 7 to 314 to 203
-[23:40:10] Maddy Watson (Peach Lock): however those are still very big differences
-[23:40:46] Maddy Watson (Peach Lock): but it's an improvement
-[23:41:06] Maddy Watson (Peach Lock): i'd suggest more contrast in the lightness of the shades
+[23:39:50] Maddy (Peach Lock): okay now that's a lot better because now the difference is consistently in the negative
+[23:40:03] Maddy (Peach Lock): it goes from 7 to 314 to 203
+[23:40:10] Maddy (Peach Lock): however those are still very big differences
+[23:40:46] Maddy (Peach Lock): but it's an improvement
+[23:41:06] Maddy (Peach Lock): i'd suggest more contrast in the lightness of the shades
 [23:42:05] *** Nick Boyd sent T-S-Urbain.png ***
 [23:42:10] Nick Boyd: like this?
 [23:42:43 | Edited 23:42:54] Nick Boyd: (shrunk the hue difference and lowered saturation a little)
-[23:42:49] Maddy Watson (Peach Lock): idk what program you're using but make sure it can display HSL values because those are what you'll be looking at most
-[23:43:18] Maddy Watson (Peach Lock): most of picking colors in pixel art is just number work
+[23:42:49] Maddy (Peach Lock): idk what program you're using but make sure it can display HSL values because those are what you'll be looking at most
+[23:43:18] Maddy (Peach Lock): most of picking colors in pixel art is just number work
 [23:43:23 | Edited 23:43:26] Nick Boyd: Paint.net for final touchups and edits
-[23:43:51] Maddy Watson (Peach Lock): yeah, thats better
+[23:43:51] Maddy (Peach Lock): yeah, thats better
 [23:43:56] Nick Boyd: and yeah it does, it displays RGB and HSL below it
 [23:44:06] Nick Boyd: HSV sorry
-[23:45:19] Maddy Watson (Peach Lock): HSV and HSL are similar, but not the same
-[23:45:49] Maddy Watson (Peach Lock): i find HSL a lot more efficient for pixel art
+[23:45:19] Maddy (Peach Lock): HSV and HSL are similar, but not the same
+[23:45:49] Maddy (Peach Lock): i find HSL a lot more efficient for pixel art
 [23:48:36] Nick Boyd: cheers! your advice has fianlly sorted out the bit that was bugging me about  the pavement shading!
 [23:48:45] *** Nick Boyd sent T-S-Urbain.png ***
-[23:49:27] Maddy Watson (Peach Lock): yup, much better
-[23:49:51] Maddy Watson (Peach Lock): the tarmac could use more contrast, aside from that a critical piece of advice i will give you is to not overuse dithering
-[23:49:56] Maddy Watson (Peach Lock): dithering is a dark art where less is more
-[23:50:02] Maddy Watson (Peach Lock): it isn't a necessity
+[23:49:27] Maddy (Peach Lock): yup, much better
+[23:49:51] Maddy (Peach Lock): the tarmac could use more contrast, aside from that a critical piece of advice i will give you is to not overuse dithering
+[23:49:56] Maddy (Peach Lock): dithering is a dark art where less is more
+[23:50:02] Maddy (Peach Lock): it isn't a necessity
 [23:50:23] Nick Boyd: cheers!
 [23:51:01] Nick Boyd: I'll finish off the changes tomorrow then, nearly midnight here
 [23:51:08] Nick Boyd: and cheers a million again!
 [23:51:26 | Edited 23:51:34] Nick Boyd: Hope Life's treating you well on the Farm! :D
-[23:51:43] Maddy Watson (Peach Lock): thank you :)
+[23:51:43] Maddy (Peach Lock): thank you :)
 [23:52:05] Nick Boyd: mind if I save this chat btw?
-[23:52:14] Maddy Watson (Peach Lock): lmao why would i
+[23:52:14] Maddy (Peach Lock): lmao why would i
 [23:52:16] Nick Boyd: Ahmed would benfit from this advice too
 [23:52:35] Nick Boyd: dunno, but polite to ask all the same! :)
-[23:52:41] Maddy Watson (Peach Lock): haha it's fine
-[23:52:53] Maddy Watson (Peach Lock): oh, that reminds me
-[23:53:04] Maddy Watson (Peach Lock): i'm going to start writing posts about art/games for my tumblr
-[23:53:06] Maddy Watson (Peach Lock): mind if i run them by you?
+[23:52:41] Maddy (Peach Lock): haha it's fine
+[23:52:53] Maddy (Peach Lock): oh, that reminds me
+[23:53:04] Maddy (Peach Lock): i'm going to start writing posts about art/games for my tumblr
+[23:53:06] Maddy (Peach Lock): mind if i run them by you?
 [23:53:15] Nick Boyd: no probs!
-[23:53:42] Maddy Watson (Peach Lock): i've got two right now waiting to be posted, which would you prefer i link first
-[23:54:03] Maddy Watson (Peach Lock): one's about my perspective of getting into doing games
-[23:54:04] Nick Boyd: surprise me! :D
-[23:54:10] Maddy Watson (Peach Lock): like, things i noticed and picked up on
-[23:54:25] Maddy Watson (Peach Lock): the other's my perspective of motivation from working on a game that goes public
-[23:54:29] Maddy Watson (Peach Lock): and how that affects it
